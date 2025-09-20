@@ -48,4 +48,8 @@ public class PowerUp extends Actor {
   public boolean isExpired(){
     return age >= lifespan;
   }
+
+  public boolean isReady(){
+    return age >= 3;
+  }
 }

@@ -44,7 +44,7 @@ public class Click {
                     Iterator<Bomb> bombIt= bombs.iterator();
                     while(bombIt.hasNext()){
                         Bomb b = bombIt.next();
-                        if(b.loc.col == colChar && b.loc.row == row){
+                        if(b.loc.col == colChar && b.loc.row == row && b.isReady()){
                             gameOver = true;
                             break;
                         }   
@@ -80,7 +80,7 @@ public class Click {
                     Iterator<PowerUp> powerIt= powerups.iterator();
                     while(powerIt.hasNext()){
                         PowerUp p = powerIt.next();
-                        if(p.loc.col == colChar && p.loc.row == row){
+                        if(p.loc.col == colChar && p.loc.row == row && p.isReady()){
                             powerIt.remove();
                             clickRange++;
                             boostSteps = duration; //start timer

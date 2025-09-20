@@ -66,6 +66,8 @@ public class Stage {
       g.drawString(String.valueOf(hoverCell.col) + String.valueOf(hoverCell.row), 740, 20);
     }
     //show game status
+    g.setColor(Color.DARK_GRAY);
+    g.drawString("Step Count: " + stepCount, 770, 20);
     g.setColor(Color.BLACK);
     g.setFont(g.getFont().deriveFont(18f));
     g.drawString("Powerup stay 10 steps, stackable.",740, 50);

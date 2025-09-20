@@ -50,4 +50,7 @@ public class Bomb extends Actor {
   public boolean isExpired(){
     return age >= lifespan;
   }
+  public boolean isReady(){
+    return age >= 6;
+  }
 }
