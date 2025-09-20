@@ -12,7 +12,7 @@ public class Stage {
   public Stage() {
     grid = new Grid();
     actors = new ArrayList<Actor>();
-    actors.add(new Cat(grid.cellAtColRow(0, 0).get()));
+    actors.add(new Enemy(grid.cellAtColRow(0, 0).get()));
     actors.add(new Dog(grid.cellAtColRow(0, 15).get()));
     actors.add(new Bird(grid.cellAtColRow(12, 9).get()));    
   }
@@ -27,6 +27,13 @@ public class Stage {
       Cell hoverCell = underMouse.get();
       g.setColor(Color.DARK_GRAY);
       g.drawString(String.valueOf(hoverCell.col) + String.valueOf(hoverCell.row), 740, 30);
+    }
+  }
+
+  //step() every actor
+  public void step() {
+    for(Actor a: actors) {
+      a.step();
     }
   }
 }

@@ -1,6 +1,5 @@
 import java.awt.Dimension;
 import java.awt.Graphics;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -32,7 +31,14 @@ public class Main extends JFrame {
 
     public void run() {
       while(true) {
+        //update canvas
+        ((Canvas)getContentPane()).stage.step();
         repaint();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
       }
     }
 }
