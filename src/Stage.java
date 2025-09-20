@@ -10,6 +10,7 @@ public class Stage {
   Grid grid;
   List<Actor> actors;
   List<Bomb> bombs;
+  List<PowerUp> powerups;
   private int stepCount;
   private static final int bombInterval = 10;
   private Random random;
@@ -18,6 +19,7 @@ public class Stage {
     grid = new Grid();
     actors = new ArrayList<Actor>();
     bombs = new ArrayList<Bomb>();
+    powerups = new ArrayList<PowerUp>();
     stepCount = 0;
     random = new Random();
     actors.add(new Enemy(grid.cellAtColRow(0, 0).get()));
@@ -31,6 +33,9 @@ public class Stage {
     }
     for (Bomb b: bombs) {
       b.paint(g);
+    }
+    for (PowerUp p: powerups) {
+      p.paint(g);
     }
 
     Optional<Cell> underMouse = grid.cellAtPoint(mouseLoc);
@@ -50,6 +55,9 @@ public class Stage {
     for(Bomb b: bombs) {
       b.step();
     }
+    for(PowerUp p: powerups) {
+      p.step();
+    }
     //when interval reached
     if(stepCount % bombInterval == 0) {
       bombSpawn();
@@ -63,5 +71,14 @@ public class Stage {
     bombs.add(new Bomb(grid.cellAtColRow(col, row).get()));
     //remove expired bombs
     bombs.removeIf(b -> b.isExpired());
+  }
+  public void powerupSpawn() {
+    //random loc
+    int col = random.nextInt(20);
+    int row = random.nextInt(20);
+    //new powerup
+    powerups.add(new PowerUp(grid.cellAtColRow(col, row).get()));
+    //remove expired powerups
+    powerups.removeIf(p -> p.isExpired());
   }
 }

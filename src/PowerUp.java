@@ -8,7 +8,7 @@ public class PowerUp extends Actor {
   public PowerUp(Cell inLoc) {
     loc = inLoc;
     age = 0;
-    color = Color.YELLOW;
+    color = new Color(255, 255, 200); //light yellow
     display = new ArrayList<Polygon>();
     update();
   }
@@ -31,7 +31,7 @@ public class PowerUp extends Actor {
     display.add(l1);
 
     //second step
-    if (age >= 3){
+    if (age >= 2){
       Polygon l2 = new Polygon();
       l2.addPoint(loc.x + 15, loc.y + 5);
       l2.addPoint(loc.x + 20, loc.y + 5);
@@ -41,5 +41,11 @@ public class PowerUp extends Actor {
       l2.addPoint(loc.x + 15, loc.y + 10);
       display.add(l2);
     }
+    if (age >= 3){
+      color = Color.YELLOW;
+    }
+  }
+  public boolean isExpired(){
+    return age >= lifespan;
   }
 }
