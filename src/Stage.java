@@ -14,7 +14,7 @@ public class Stage {
     actors = new ArrayList<Actor>();
     actors.add(new Enemy(grid.cellAtColRow(0, 0).get()));
     actors.add(new Dog(grid.cellAtColRow(0, 15).get()));
-    actors.add(new Bird(grid.cellAtColRow(12, 9).get()));    
+    actors.add(new Bomb(grid.cellAtColRow(12, 9).get()));    
   }
 
   public void paint(Graphics g, Point mouseLoc) {
