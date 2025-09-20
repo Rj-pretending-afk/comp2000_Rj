@@ -5,14 +5,14 @@ public class Spawn{
     private Random random;
     private Stage stage;
     private Grid grid;
-    private List<Actor> actors;
+    private List<Enemy> enemies;
     private List<Bomb> bombs;
     private List<PowerUp> powerups;
 
-    public Spawn(Stage s,Grid g,List<Actor> a,List<Bomb> b,List<PowerUp> p){
+    public Spawn(Stage s,Grid g,List<Enemy> e,List<Bomb> b,List<PowerUp> p){
         stage = s;
         grid = g;
-        actors = a;
+        enemies = e;
         bombs = b;
         powerups = p;
         random = new Random();
@@ -23,8 +23,8 @@ public class Spawn{
         int row = random.nextInt(20);
         Cell target = grid.cellAtColRow(col, row).get();
         boolean Used = false;
-        for(Actor a : actors){
-            if(a.loc.col == target.col && a.loc.row == target.row){
+        for(Enemy e : enemies){
+            if(e.loc.col == target.col && e.loc.row == target.row){
                 Used = true;
                 break;
             }
@@ -38,8 +38,8 @@ public class Spawn{
         int row = random.nextInt(20);
         Cell target = grid.cellAtColRow(col, row).get();
         boolean Used = false;
-        for(Actor a : actors){
-            if(a.loc.col == target.col && a.loc.row == target.row){
+        for(Enemy e : enemies){
+            if(e.loc.col == target.col && e.loc.row == target.row){
                 Used = true;
                 break;
             }

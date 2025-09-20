@@ -1,5 +1,7 @@
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -13,6 +15,11 @@ public class Main extends JFrame {
       Stage stage = new Stage();
       public Canvas() {
         setPreferredSize(new Dimension(1024, 720));
+        //change mouse behavior
+        addMouseListener(new MouseAdapter(){
+          @Override
+          public void mouseClicked(MouseEvent e){stage.handleClick(e.getPoint());}
+        });
       }
 
       @Override
@@ -33,7 +40,10 @@ public class Main extends JFrame {
       //separate thread
       Thread stepThread = new Thread(() -> {
         while(true) {
-          ((Canvas)getContentPane()).stage.step();
+          Canvas canvas = (Canvas)getContentPane();
+          if(!canvas.stage.isGameOver()){
+            canvas.stage.step();
+          }
           try {
             Thread.sleep(500);
           } catch (InterruptedException e) {
