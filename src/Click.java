@@ -10,7 +10,9 @@ public class Click {
     private List<PowerUp> powerups;
     private int clickRange;
     private boolean gameOver;
-
+    //setup boost duration steps
+    private int boostSteps = 0;
+    private static final int duration = 10;
     public Click(Grid g, List<Enemy> e, List<Bomb> b, List<PowerUp> p){
         grid = g;
         enemies = e;
@@ -62,6 +64,7 @@ public class Click {
             if(p.loc.col == colChar && p.loc.row == row){
                 powerIt.remove();
                 clickRange++;
+                boostSteps = duration; //start timer
                 return;
             }
         }
@@ -84,5 +87,13 @@ public class Click {
     public void reset(){
         clickRange = 1;
         gameOver = false;
+    }
+    public void step(){
+        if(boostSteps > 0){
+            boostSteps--;
+            if(boostSteps == 0 && clickRange > 1){
+                clickRange--;
+            }
+        }
     }
 }

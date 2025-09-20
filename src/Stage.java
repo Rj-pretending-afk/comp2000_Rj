@@ -84,6 +84,7 @@ public class Stage {
       return;
     }
     stepCount++;
+    clicker.step();
     for(Enemy e: enemies) {
       e.step();
     }
