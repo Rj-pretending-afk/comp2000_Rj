@@ -70,7 +70,7 @@ public class Click {
         while(enemyIt.hasNext()){
             Enemy e = enemyIt.next();
             if(e.loc.col == colChar && e.loc.row == row){
-                gameOver = true;
+                enemyIt.remove();
                 return;
             }
         }
