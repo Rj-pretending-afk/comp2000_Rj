@@ -3,7 +3,7 @@ import java.awt.Polygon;
 import java.util.ArrayList;
 
 public class Bomb extends Actor {
-  private int age; //how long bomb place
+  private int age; //how long bomb placed
   private static final int lifespan = 30; //bomb lifespan
   public Bomb(Cell inLoc) {
     loc = inLoc;

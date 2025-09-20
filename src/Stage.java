@@ -21,7 +21,7 @@ public class Stage {
     stepCount = 0;
     random = new Random();
     actors.add(new Enemy(grid.cellAtColRow(0, 0).get()));
-    actors.add(new Dog(grid.cellAtColRow(0, 15).get()));  
+    actors.add(new PowerUp(grid.cellAtColRow(0, 15).get()));  
   }
 
   public void paint(Graphics g, Point mouseLoc) {
