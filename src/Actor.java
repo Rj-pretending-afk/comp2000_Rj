@@ -3,7 +3,7 @@ import java.awt.Graphics;
 import java.awt.Polygon;
 import java.util.List;
 
-public abstract class Actor {
+public abstract class Actor implements Steppable{
   Color color;
   Cell loc;
   List<Polygon> display;
@@ -15,5 +15,10 @@ public abstract class Actor {
       g.setColor(Color.GRAY);
       g.drawPolygon(p);
     }
+  }
+  
+  @Override
+  public void step() {
+  // nothing should be happening default
   }
 }
