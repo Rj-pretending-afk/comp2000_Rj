@@ -101,6 +101,7 @@ public class Click {
         clickRange = 1;
         gameOver = false;
         gameWin = false;
+        boostSteps = 0;
     }
     public void step(){
         if(boostSteps > 0){

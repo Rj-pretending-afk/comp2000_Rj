@@ -24,10 +24,10 @@ public class Stage {
     stepCount = 0;
     spawner = new Spawn(this,grid,enemies,bombs,powerups);
     clicker = new Click(grid, enemies, bombs, powerups);
-    enemies.add(new Enemy(grid.cellAtColRow(0, 0).get()));
-    enemies.add(new Enemy(grid.cellAtColRow(19, 19).get()));
-    enemies.add(new Enemy(grid.cellAtColRow(0, 19).get()));
-    enemies.add(new Enemy(grid.cellAtColRow(19, 0).get()));
+    enemies.add(new Enemy(grid.cellAtColRow(3, 3).get()));
+    enemies.add(new Enemy(grid.cellAtColRow(17, 17).get()));
+    enemies.add(new Enemy(grid.cellAtColRow(3, 17).get()));
+    enemies.add(new Enemy(grid.cellAtColRow(17, 3).get()));
     enemies.add(new Enemy(grid.cellAtColRow(10, 10).get()));
   }
 
@@ -63,14 +63,14 @@ public class Stage {
             }
         }
       }
-      g.drawString(String.valueOf(hoverCell.col) + String.valueOf(hoverCell.row), 740, 30);
+      g.drawString(String.valueOf(hoverCell.col) + String.valueOf(hoverCell.row), 740, 20);
     }
     //show game status
     g.setColor(Color.BLACK);
     g.setFont(g.getFont().deriveFont(18f));
-    g.drawString("Click on powerup for 10 steps of click range boost.",740, 40);
-    g.drawString("Game over if click on bomb.", 740, 65);
-    g.drawString("Kill all enemies for the win.", 740, 90);
+    g.drawString("Powerup stay 10 steps, stackable.",740, 50);
+    g.drawString("Game over if click on bomb.", 740, 75);
+    g.drawString("Kill all enemies for the win.", 740, 100);
     if(clicker.isGameOver()){
       g.setColor(Color.RED);
       //set font just for game over
@@ -122,5 +122,20 @@ public class Stage {
   }
   public boolean isWin(){
     return clicker.isWin();
+  }
+
+  public void reset(){
+    grid = new Grid();
+    enemies.clear();
+    bombs.clear();
+    powerups.clear();
+    stepCount = 0;
+    clicker.reset();
+    spawner = new Spawn(this,grid,enemies,bombs,powerups);
+    enemies.add(new Enemy(grid.cellAtColRow(3, 3).get()));
+    enemies.add(new Enemy(grid.cellAtColRow(17, 17).get()));
+    enemies.add(new Enemy(grid.cellAtColRow(3, 17).get()));
+    enemies.add(new Enemy(grid.cellAtColRow(17, 3).get()));
+    enemies.add(new Enemy(grid.cellAtColRow(10, 10).get()));
   }
 }
