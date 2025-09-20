@@ -32,6 +32,7 @@ public class Stage {
 
   public void paint(Graphics g, Point mouseLoc) {
     grid.paint(g, mouseLoc);
+    //do a list copy to fix the thread conflict
     List<Enemy> eCopy = new ArrayList<>(enemies);
     List<Bomb> bCopy = new ArrayList<>(bombs);
     List<PowerUp> pCopy = new ArrayList<>(powerups);
