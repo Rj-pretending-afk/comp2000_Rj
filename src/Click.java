@@ -10,6 +10,7 @@ public class Click {
     private List<PowerUp> powerups;
     private int clickRange;
     private boolean gameOver;
+    private boolean gameWin;
     //setup boost duration steps
     private int boostSteps = 0;
     private static final int duration = 10;
@@ -20,6 +21,7 @@ public class Click {
         powerups = p;
         clickRange = 1;
         gameOver = false;
+        gameWin = false;
     }
     //handle click
     public void handleClick(Point clickPoint){
@@ -45,6 +47,10 @@ public class Click {
         }
     }
     private void cellCheck(int col, int row){
+        //freeze gamestate after win/lose
+        if (gameWin || gameOver) {
+            return;
+        }
         char colChar = (char)(col + 'A');
 
         //check bomb
@@ -74,6 +80,10 @@ public class Click {
             Enemy e = enemyIt.next();
             if(e.loc.col == colChar && e.loc.row == row){
                 enemyIt.remove();
+                //win if all enemies removed
+                if (enemies.isEmpty()) {
+                    gameWin = true;
+                }
                 return;
             }
         }
@@ -84,9 +94,13 @@ public class Click {
     public boolean isGameOver(){
         return gameOver;
     }
+    public boolean isWin(){
+        return gameWin;
+    }
     public void reset(){
         clickRange = 1;
         gameOver = false;
+        gameWin = false;
     }
     public void step(){
         if(boostSteps > 0){

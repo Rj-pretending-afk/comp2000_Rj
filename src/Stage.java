@@ -67,20 +67,27 @@ public class Stage {
     }
     //show game status
     g.setColor(Color.BLACK);
-    g.drawString("Step: " + stepCount, 740, 10);
-    g.drawString("Click range: " + clicker.getRange(), 740, 60);
+    g.setFont(g.getFont().deriveFont(18f));
+    g.drawString("Click on powerup for 10 steps of click range boost.",740, 40);
+    g.drawString("Game over if click on bomb.", 740, 65);
+    g.drawString("Kill all enemies for the win.", 740, 90);
     if(clicker.isGameOver()){
       g.setColor(Color.RED);
       //set font just for game over
-      g.setFont(g.getFont().deriveFont(56f));
+      g.setFont(g.getFont().deriveFont(65f));
       g.drawString("<<<GAME OVER>>>", 300, 380);
-      g.setFont(g.getFont().deriveFont(12f));
+    }
+    if(clicker.isWin()){
+      g.setColor(Color.GREEN);
+      //set font just for win
+      g.setFont(g.getFont().deriveFont(65f));
+      g.drawString("<<<YOU WIN>>>", 300, 380);
     }
   }
 
   //step() every actor
   public void step() {
-    if(clicker.isGameOver()){
+    if(clicker.isGameOver() || clicker.isWin()){
       return;
     }
     stepCount++;
@@ -112,5 +119,8 @@ public class Stage {
   }
   public boolean isGameOver(){
     return clicker.isGameOver();
+  }
+  public boolean isWin(){
+    return clicker.isWin();
   }
 }

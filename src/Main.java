@@ -41,7 +41,7 @@ public class Main extends JFrame {
       Thread stepThread = new Thread(() -> {
         while(true) {
           Canvas canvas = (Canvas)getContentPane();
-          if(!canvas.stage.isGameOver()){
+          if(!canvas.stage.isGameOver() && !canvas.stage.isWin()){
             canvas.stage.step();
           }
           try {
