@@ -30,15 +30,26 @@ public class Main extends JFrame {
     }
 
     public void run() {
+      //separate thread
+      Thread stepThread = new Thread(() -> {
+        while(true) {
+          ((Canvas)getContentPane()).stage.step();
+          try {
+            Thread.sleep(500);
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
+        }
+      });
+      stepThread.start();
+      
       while(true) {
-        //update canvas
-        ((Canvas)getContentPane()).stage.step();
         repaint();
         try {
-            Thread.sleep(500);
+          Thread.sleep(35);
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
       }
     }
-}
+  } 
