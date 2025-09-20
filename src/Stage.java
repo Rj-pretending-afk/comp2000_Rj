@@ -32,13 +32,16 @@ public class Stage {
 
   public void paint(Graphics g, Point mouseLoc) {
     grid.paint(g, mouseLoc);
-    for(Enemy e: enemies) {
+    List<Enemy> eCopy = new ArrayList<>(enemies);
+    List<Bomb> bCopy = new ArrayList<>(bombs);
+    List<PowerUp> pCopy = new ArrayList<>(powerups);
+    for(Enemy e: eCopy) {
       e.paint(g);
     }
-    for (Bomb b: bombs) {
+    for (Bomb b: bCopy) {
       b.paint(g);
     }
-    for (PowerUp p: powerups) {
+    for (PowerUp p: pCopy) {
       p.paint(g);
     }
 
