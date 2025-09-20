@@ -50,6 +50,18 @@ public class Stage {
     if(underMouse.isPresent()) {
       Cell hoverCell = underMouse.get();
       g.setColor(Color.DARK_GRAY);
+      //make the hovercell scale with clickRange
+      int centerCol = hoverCell.col - 'A';
+      int centerRow = hoverCell.row;
+      int range = clicker.getRange();
+      for(int col = centerCol - (range - 1); col <= centerCol + (range - 1); col++) {
+        for(int row = centerRow - (range - 1); row <= centerRow + (range - 1); row++) {
+          if(col >= 0 && col < 20 && row >= 0 && row < 20) {
+            Cell c = grid.cellAtColRow(col, row).get();
+            g.fillRect(c.x, c.y, c.width, c.height);
+            }
+        }
+      }
       g.drawString(String.valueOf(hoverCell.col) + String.valueOf(hoverCell.row), 740, 30);
     }
     //show game status
