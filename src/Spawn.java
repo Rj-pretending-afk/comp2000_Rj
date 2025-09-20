@@ -23,8 +23,21 @@ public class Spawn{
         int row = random.nextInt(20);
         Cell target = grid.cellAtColRow(col, row).get();
         boolean Used = false;
+        //check for all actors
         for(Enemy e : enemies){
             if(e.loc.col == target.col && e.loc.row == target.row){
+                Used = true;
+                break;
+            }
+        }
+        for(Bomb b : bombs){
+            if(b.loc.col == target.col && b.loc.row == target.row){
+                Used = true;
+                break;
+            }
+        }
+         for(PowerUp p : powerups){
+            if(p.loc.col == target.col && p.loc.row == target.row){
                 Used = true;
                 break;
             }
@@ -33,13 +46,27 @@ public class Spawn{
             bombs.add(new Bomb(target));
         }
     }
+    
     public void spawnPowerUp(){
         int col = random.nextInt(20);
         int row = random.nextInt(20);
         Cell target = grid.cellAtColRow(col, row).get();
         boolean Used = false;
+        //check for all actors
         for(Enemy e : enemies){
             if(e.loc.col == target.col && e.loc.row == target.row){
+                Used = true;
+                break;
+            }
+        }
+        for(Bomb b : bombs){
+            if(b.loc.col == target.col && b.loc.row == target.row){
+                Used = true;
+                break;
+            }
+        }
+         for(PowerUp p : powerups){
+            if(p.loc.col == target.col && p.loc.row == target.row){
                 Used = true;
                 break;
             }

@@ -12,8 +12,8 @@ public class Stage {
   List<PowerUp> powerups;
   private Spawn spawner;
   private int stepCount;
-  private static final int bombInterval = 10;
-  private static final int powerupInterval = 30;
+  private static final int bombInterval = 3;
+  private static final int powerupInterval = 10;
   private Click clicker;
 
   public Stage() {
@@ -28,6 +28,7 @@ public class Stage {
     enemies.add(new Enemy(grid.cellAtColRow(19, 19).get()));
     enemies.add(new Enemy(grid.cellAtColRow(0, 19).get()));
     enemies.add(new Enemy(grid.cellAtColRow(19, 0).get()));
+    enemies.add(new Enemy(grid.cellAtColRow(10, 10).get()));
   }
 
   public void paint(Graphics g, Point mouseLoc) {
@@ -49,7 +50,7 @@ public class Stage {
     Optional<Cell> underMouse = grid.cellAtPoint(mouseLoc);
     if(underMouse.isPresent()) {
       Cell hoverCell = underMouse.get();
-      g.setColor(Color.DARK_GRAY);
+      g.setColor(new Color(64, 64, 64, 128));
       //make the hovercell scale with clickRange
       int centerCol = hoverCell.col - 'A';
       int centerRow = hoverCell.row;
@@ -70,7 +71,10 @@ public class Stage {
     g.drawString("Click range: " + clicker.getRange(), 740, 60);
     if(clicker.isGameOver()){
       g.setColor(Color.RED);
-      g.drawString("<<<GAME OVER>>>", 400, 360);
+      //set font just for game over
+      g.setFont(g.getFont().deriveFont(56f));
+      g.drawString("<<<GAME OVER>>>", 300, 380);
+      g.setFont(g.getFont().deriveFont(12f));
     }
   }
 
