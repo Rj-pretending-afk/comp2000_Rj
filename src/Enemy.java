@@ -24,10 +24,10 @@ public class Enemy extends Actor {
     int newCol = loc.col - 'A';
     int newRow = loc.row;
     switch(dir) {
-      case 0: newRow -= 2; break; // up
-      case 1: newRow += 2; break; // down
-      case 2: newCol -= 2; break; // left
-      case 3: newCol += 2; break; // right
+      case 0: newRow -= 1; break; // up
+      case 1: newRow += 1; break; // down
+      case 2: newCol -= 1; break; // left
+      case 3: newCol += 1; break; // right
     }
     //check area
     if(newCol >= 0 && newCol < 20 && newRow >= 0 && newRow < 20) {

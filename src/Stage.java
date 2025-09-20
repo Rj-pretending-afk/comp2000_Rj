@@ -4,16 +4,16 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 public class Stage {
   Grid grid;
   List<Actor> actors;
   List<Bomb> bombs;
   List<PowerUp> powerups;
+  private Spawn spawner;
   private int stepCount;
   private static final int bombInterval = 10;
-  private Random random;
+  private static final int powerupInterval = 30;
 
   public Stage() {
     grid = new Grid();
@@ -21,9 +21,8 @@ public class Stage {
     bombs = new ArrayList<Bomb>();
     powerups = new ArrayList<PowerUp>();
     stepCount = 0;
-    random = new Random();
+    spawner = new Spawn(this,grid,actors,bombs,powerups);
     actors.add(new Enemy(grid.cellAtColRow(0, 0).get()));
-    actors.add(new PowerUp(grid.cellAtColRow(0, 15).get()));  
   }
 
   public void paint(Graphics g, Point mouseLoc) {
@@ -60,25 +59,10 @@ public class Stage {
     }
     //when interval reached
     if(stepCount % bombInterval == 0) {
-      bombSpawn();
+      spawner.spawnBomb();
     }
-  }
-  private void bombSpawn() {
-    //random loc
-    int col = random.nextInt(20);
-    int row = random.nextInt(20);
-    //new bomb
-    bombs.add(new Bomb(grid.cellAtColRow(col, row).get()));
-    //remove expired bombs
-    bombs.removeIf(b -> b.isExpired());
-  }
-  public void powerupSpawn() {
-    //random loc
-    int col = random.nextInt(20);
-    int row = random.nextInt(20);
-    //new powerup
-    powerups.add(new PowerUp(grid.cellAtColRow(col, row).get()));
-    //remove expired powerups
-    powerups.removeIf(p -> p.isExpired());
+    if(stepCount % powerupInterval == 0) {
+      spawner.spawnPowerUp();
+    }
   }
 }
