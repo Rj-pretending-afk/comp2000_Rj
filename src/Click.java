@@ -25,7 +25,7 @@ public class Click {
     }
     //handle click
     public void handleClick(Point clickPoint){
-        if(gameOver){
+        if(gameOver || gameWin){
             return;
         }
         //find cell clicked
@@ -36,55 +36,58 @@ public class Click {
         Cell center = target.get();
         int centerCol = center.col - 'A';
         int centerRow = center.row;
-
-        //find cell in range base on clicked cell & range
-        for(int col = centerCol - (clickRange - 1); col <= centerCol + (clickRange - 1); col++){
-            for(int row = centerRow - (clickRange - 1); row <= centerRow + (clickRange - 1); row++){
-                if(col >= 0 && col < 20 && row >= 0 && row < 20){
-                    cellCheck(col,row);
+        //logic update, check bomb in range first
+        for (int col = centerCol - (clickRange - 1); col <= centerCol + (clickRange - 1); col++) {
+            for (int row = centerRow - (clickRange - 1); row <= centerRow + (clickRange - 1); row++) {
+                if (col >= 0 && col < 20 && row >= 0 && row < 20) {
+                    char colChar = (char)(col + 'A');
+                    Iterator<Bomb> bombIt= bombs.iterator();
+                    while(bombIt.hasNext()){
+                        Bomb b = bombIt.next();
+                        if(b.loc.col == colChar && b.loc.row == row){
+                            gameOver = true;
+                            break;
+                        }   
+                    }
                 }
             }
         }
-    }
-    private void cellCheck(int col, int row){
-        //freeze gamestate after win/lose
-        if (gameWin || gameOver) {
-            return;
-        }
-        char colChar = (char)(col + 'A');
-
-        //check bomb
-        Iterator<Bomb> bombIt= bombs.iterator();
-        while(bombIt.hasNext()){
-            Bomb b = bombIt.next();
-            if(b.loc.col == colChar && b.loc.row == row){
-                gameOver = true;
-                return;
-            }
-        }
-
-        //check powerup
-        Iterator<PowerUp> powerIt= powerups.iterator();
-        while(powerIt.hasNext()){
-            PowerUp p = powerIt.next();
-            if(p.loc.col == colChar && p.loc.row == row){
-                powerIt.remove();
-                clickRange++;
-                boostSteps = duration; //start timer
-                return;
-            }
-        }
-        //check enemy
-        Iterator<Enemy> enemyIt= enemies.iterator();
-        while(enemyIt.hasNext()){
-            Enemy e = enemyIt.next();
-            if(e.loc.col == colChar && e.loc.row == row){
-                enemyIt.remove();
-                //win if all enemies removed
-                if (enemies.isEmpty()) {
-                    gameWin = true;
+        //check enemy 2nd
+        for (int col = centerCol - (clickRange - 1); col <= centerCol + (clickRange - 1); col++) {
+            for (int row = centerRow - (clickRange - 1); row <= centerRow + (clickRange - 1); row++) {
+                if (col >= 0 && col < 20 && row >= 0 && row < 20) {
+                    char colChar = (char)(col + 'A');
+                    Iterator<Enemy> enemyIt= enemies.iterator();
+                    while(enemyIt.hasNext()){
+                        Enemy e = enemyIt.next();
+                        if(e.loc.col == colChar && e.loc.row == row){
+                            enemyIt.remove();
+                            //win if all enemies removed
+                            if (enemies.isEmpty()) {
+                                gameWin = true;
+                            }
+                            return;
+                        }   
+                    }
                 }
-                return;
+            }
+        }
+        //check powerup last
+        for (int col = centerCol - (clickRange - 1); col <= centerCol + (clickRange - 1); col++) {
+            for (int row = centerRow - (clickRange - 1); row <= centerRow + (clickRange - 1); row++) {
+                if (col >= 0 && col < 20 && row >= 0 && row < 20) {
+                    char colChar = (char)(col + 'A');
+                    Iterator<PowerUp> powerIt= powerups.iterator();
+                    while(powerIt.hasNext()){
+                        PowerUp p = powerIt.next();
+                        if(p.loc.col == colChar && p.loc.row == row){
+                            powerIt.remove();
+                            clickRange++;
+                            boostSteps = duration; //start timer
+                            return;
+                        }   
+                    }
+                }
             }
         }
     }
