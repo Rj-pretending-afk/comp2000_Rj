@@ -66,7 +66,8 @@ public class Main extends JFrame {
     while(true) {
       repaint();
       try {
-        Thread.sleep(35);
+        //7ms for 144fps, 16ms for 60fps, 33ms for 30fps
+        Thread.sleep(7);
       } catch (InterruptedException e) {
         e.printStackTrace();
       }

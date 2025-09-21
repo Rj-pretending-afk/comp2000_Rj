@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Actor implements Steppable{
@@ -9,14 +10,16 @@ public abstract class Actor implements Steppable{
   List<Polygon> display;
 
   public void paint(Graphics g) {
-    for(Polygon p: display) {
+    //copied list to avoid ConcurrentModificationException
+    List<Polygon> displayCopy = new ArrayList<>(display);
+    for(Polygon p: displayCopy) {
       g.setColor(color);
       g.fillPolygon(p);
       g.setColor(Color.GRAY);
       g.drawPolygon(p);
     }
   }
-  
+
   @Override
   public void step() {
   // nothing should be happening default
