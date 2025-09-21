@@ -126,3 +126,6 @@ Iterator<Enemy> enemyIt = enemies.iterator();
 4. **MVC-like Structure**: Stage (Model), Paint (View), Click/Main (Controller)
 
 The combination of inheritance and generics creates clean, reliable code that's easy to understand and extend.
+
+### Personal talk about this unit
+I was working overseas and travel frequently, did not have time to attend for group work hence why I do not have any groups. Working on this project is fun and allows me to read && write all my comments/commit messages from scratch again.
