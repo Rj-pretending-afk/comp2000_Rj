@@ -8,7 +8,7 @@ public class PowerUp extends Actor {
   public PowerUp(Cell inLoc) {
     loc = inLoc;
     age = 0;
-    color = new Color(255, 255, 200); //light yellow
+    color = new Color(255, 255, 200, 128); //light yellow
     display = new ArrayList<Polygon>();
     update();
   }
