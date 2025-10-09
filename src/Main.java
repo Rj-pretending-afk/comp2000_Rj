@@ -55,7 +55,7 @@ public class Main extends JFrame {
           canvas.stage.step();
         }
         try {
-          Thread.sleep(300);
+          Thread.sleep(150);
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
